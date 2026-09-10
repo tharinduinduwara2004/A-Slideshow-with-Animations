@@ -161,6 +161,18 @@
       const slider = document.querySelector(".slider");
       const slides = document.querySelectorAll(".slide");
 
+      let interval = 1000;
+      let next = 0;
+      let switcher = setInterval(()=>{
+        let previous = next;
+        if(next>= slides.length){
+          next = 0;
+        }else{
+          next++;
+        }
+        console.log(previous,next);
+      },interval)
+
     </script>
   </body>
 </html>
