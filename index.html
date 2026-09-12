@@ -155,6 +155,8 @@
       </div>
 
       
+
+      
     </div>
     <script type="module">
       import anime from "./lib/anime.es.js";
@@ -163,14 +165,51 @@
 
       let interval = 1000;
       let next = 0;
+      slides[0].style.opacity = 1;
       let switcher = setInterval(()=>{
         let previous = next;
-        if(next>= slides.length){
+        if(next>= slides.length -1){
           next = 0;
         }else{
           next++;
         }
         console.log(previous,next);
+        slides[next].style.zIndex = 2;
+        slides[previous].style.zIndex = 1;
+        anime({
+          targets: slides[next],
+          opacity: 1,
+          duration: 1000,
+          easing: 'easeInOutQuad',
+        })
+        setTimeout(()=>{
+          slides[previous].style.opacity = 0;
+        },1000)
+
+        //slide title
+        let h1 = slides[next].querySelector("h1");
+        h1.style.left = "-1000px";
+        anime({
+          targets: h1,
+          left: "0px",
+          duration: 500,
+          easing: 'easeInOutQuad',
+          delay: 1000
+        })
+
+        //slide p
+        let p = slides[next].querySelector("p");
+        p.style.top = "100px";
+        p.style.opacity = 0;
+        anime({
+          targets: p,
+          top: "0px",
+          opacity: 1,
+          duration: 500,
+          easing: 'easeInOutQuad',
+          delay: 1000
+        })
+
       },interval)
 
     </script>
